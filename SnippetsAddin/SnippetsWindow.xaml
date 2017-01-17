@@ -8,13 +8,14 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"                            
         Title="Snippets" TitleCharacterCasing="Normal"        
-        FontSize="15"
+        FontSize="14"                          
         WindowStyle="SingleBorderWindow" ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterOwner"         
         IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False"                       
-        Width="900" Height="700" MinHeight="700">
+        Width="900" Height="700" MinHeight="700"                       
+                       Icon="icon.png">
     
-        <Grid>
+    <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="*" />
