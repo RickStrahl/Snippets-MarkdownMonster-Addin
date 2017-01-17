@@ -1,0 +1,13 @@
+﻿{
+  {
+    "id": "SampleAddin",
+    "name": "Sample Addin",
+    "summary": "Demonstrates the most basic Addin you can create",
+    "description": null,
+    "releaseNotes": null,
+    "version": "0.01",
+    "author": "© your comany",
+    "updated": "2017-1-10T12:00:00Z"
+  }
+
+}
