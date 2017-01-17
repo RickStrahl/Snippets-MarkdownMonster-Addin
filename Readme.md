@@ -26,6 +26,20 @@ For example the following:
 
 embeds a date into the snippet when it's created.
 
+You also get access to the full Addin model that exposes a large chunk of Markdown Monsters active document, editor and UI using a `Model property. 
+
+For example, if you want to get the current filename:
+
+```Markdown
+Main Window Title:  {{Model.Window.Title}}. 
+
+Time is: {{DateTime.Now}}
+
+Filename: {{Model.ActiveDocument.Filename}}
+```
+
+You only get to apply expressions, but that gives you a fair bit of functionality you can work with.
+
 > #### Early pre-release
 > This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
 

@@ -73,6 +73,7 @@ namespace SnippetsAddin
                 }
             }
 
+            
             this.SetSelection(snippetText);
         }
 
