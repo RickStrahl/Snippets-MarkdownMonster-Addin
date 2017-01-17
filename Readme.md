@@ -20,7 +20,7 @@ Snippets can contain embedded C# code expressions using `{{ expression }}` synta
 
 For example the following:
 
-```markdown
+```html
 <div class="small">
    created by, Rick Strahl, on {{DateTime.Now.ToString("MMM dd, yyyy")}}
 </div>   
