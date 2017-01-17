@@ -2,7 +2,9 @@
 
 <img src="SnippetsAddin.png" Height="128" />
 
-This project provides a simple snippet manager that lets you embed common snippets of Markdown or HTML into your Markdown Monster document. You can store and select from a list of text based snippets that you can embed into your Markdown or HTML documents by double clicking, pressing `ENTER` or `SPACE`.
+This project provides a simple snippet manager addin for the Markdown [Monster Markdown Editor and Weblog Publisher](https://markdownmonster.west-wind.com). The addin lets you embed saved text snippets with optional C# expressions into your Markdown Monster document. 
+
+You can store and select from a list of text based snippets that you can embed into your Markdown or HTML documents by double clicking, pressing `ENTER` or `SPACE`.
 
 ![](ScreenShot.png)
 
@@ -24,7 +26,7 @@ For example the following:
 </div>   
 ```
 
-embeds a date into the snippet when it's created.
+embeds a date into the snippet when it's created. Snippets can embed **any** text since Markdown supports both plain text as well as HTML markup as in the example above.
 
 You also get access to the full Addin model that exposes a large chunk of Markdown Monsters active document, editor and UI using a `Model property. 
 
@@ -43,8 +45,13 @@ You only get to apply expressions, but that gives you a fair bit of functionalit
 > #### Early pre-release
 > This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
 
+### 
+
 ### How it works
 
 ## Configuration
 
+### Related Links
 
+* [Markdown Monster](https://markdownmonster.west-wind.com)
+* [Creating a Markdown Monster Addin](https://markdownmonster.west-wind.com/docs/_4ne0s0qoi.htm)
