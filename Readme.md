@@ -45,7 +45,20 @@ You only get to apply expressions, but that gives you a fair bit of functionalit
 > #### Early pre-release
 > This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
 
-### 
+### Open for Feedback
+Currently this is just a first cut for snippets. There are a number of things that can be done with this but I'm curious how people might want to use this.
+
+#### Scripting Engine
+Currently the templates use a simple **{{ Handlebar-like }}** expression syntax that can be embedded into a document. Another option might be to embed a full fledged **Razor Engine** using ASP.NET Style razor syntax to allow much more elaborate scripting.
+
+The latter offers some pretty significant opportunities for generating mail merge like capabilities into Markdown Monster, so I'm leaning towards that. It might also be possible to support both styles since the expression engine is very small and light weight.
+
+#### Code expansion
+Adding support for code expansion in the editor so that if you type a letter combination the snippet will fire if the snippet window is open (and perhaps even when not). 
+
+#### Feedback: Use Issues
+If you have any thoughts or ideas on this please chime in in the [Issues section](https://github.com/RickStrahl/Snippets-MarkdownMonster-Addin/issues).
+
 
 ### How it works
 
