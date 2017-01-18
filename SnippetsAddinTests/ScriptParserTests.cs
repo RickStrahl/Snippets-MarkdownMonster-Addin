@@ -1,8 +1,7 @@
 ﻿
 using System;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
-using Microsoft.CodeAnalysis.Scripting;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SnippetsAddin;
 
@@ -45,7 +44,7 @@ Time is {{DateTime.sNow.ToString(""MMM dd, yyyy HH:mm:ss"")}}
 ";
 
             var parser = new ScriptParser();
-            string result = await parser.EvaluateScriptAsync(script, new Globals { Name = "Rick" });
+            string result = parser.EvaluateScript(script, new Globals { Name = "Rick" });
 
             Assert.IsNull(result, "Parser should have returned null due to the error expression.");
 
@@ -64,7 +63,7 @@ Time is {{DateTime.Now.ToString(""MMM dd, yyyy HH:mm:ss"")}}
 
 
             var parser = new ScriptParser();
-            string result = parser.EvaluateScriptAsync(script, new Globals {Name = "Rick"}).Result;
+            string result = parser.EvaluateScript(script, new Globals {Name = "Rick"});
 
             Console.WriteLine(result);
 
@@ -106,6 +105,7 @@ Time is @DateTime.Now.ToString(""MMM dd, yyyy HH:mm:ss"")
             Console.WriteLine(result);
         }
 
+#if false  // Roslyn scripting
         [TestMethod]
         public async Task ScriptTest()
         {
@@ -147,7 +147,7 @@ Time is @DateTime.Now.ToString(""MMM dd, yyyy HH:mm:ss"")
 
             //result is now 5
             Console.WriteLine(result);
-
         }
+#endif
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MarkdownMonster;
@@ -55,19 +56,40 @@ namespace SnippetsAddin
             DataContext = Model;            
         }
 
+      
+
+
+        private MarkdownEditorSimple editor;
+
+        private void SnippetsWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            string initialValue = null;
+            if (Model.Configuration.Snippets.Count > 0)
+            {
+                ListSnippets.SelectedItem = Model.Configuration.Snippets[0];
+                initialValue = Model.Configuration.Snippets[0].SnippetText;
+            }
+
+            ListSnippets.Focus();
+
+
+            editor = new MarkdownEditorSimple(WebBrowserSnippet, initialValue);
+            editor.IsDirtyAction =  () =>
+            { 
+                string val = editor.GetMarkdown();
+                if (val != null && Model.ActiveSnippet != null)
+                    Model.ActiveSnippet.SnippetText = val;
+
+                return true;
+            };
+        }
+
+
         private void SnippetsWindow_Unloaded(object sender, RoutedEventArgs e)
         {
             SnippetsAddinConfiguration.Current.Write();
         }
 
-        private void SnippetsWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (Model.Configuration.Snippets.Count > 0)
-                ListSnippets.SelectedItem = Model.Configuration.Snippets[0];
-
-            ListSnippets.Focus();
-        }
-        
 
         private void ListSnippets_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -84,15 +106,19 @@ namespace SnippetsAddin
             ListSnippets.SelectedItem = Model.Configuration.Snippets[0];
         }
 
+
         private void ToolButtonRemoveSnippet_Click(object sender, RoutedEventArgs e)
         {
-
-
+            var snippet = ListSnippets.SelectedItem as Snippet;
+            if (snippet == null)
+                return;
+            SnippetsAddinConfiguration.Current.Snippets.Remove(snippet);
         }
+
 
         private void ListSnippets_KeyUp(object sender, KeyEventArgs e)
         {
-            Debug.WriteLine(e.Key);
+            
             if (e.Key == Key.Return || e.Key == Key.Space)
             {
                 var snippet = ListSnippets.SelectedItem as Snippet;
@@ -100,5 +126,13 @@ namespace SnippetsAddin
                     Model.Addin.InsertSnippet(snippet);
             }
         }
+
+        private void ListSnippets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var snippet = ListSnippets.SelectedItem as Snippet;
+            if (snippet != null)
+                editor?.SetMarkdown(snippet.SnippetText);
+        }
+
     }
 }

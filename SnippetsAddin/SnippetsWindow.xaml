@@ -17,7 +17,7 @@
     
     <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions >
@@ -84,6 +84,7 @@
                              IsTextSearchCaseSensitive="False"
                              IsTextSearchEnabled="True"                   
                              HorizontalContentAlignment="Stretch"
+                 SelectionChanged="ListSnippets_SelectionChanged"
                              MouseDoubleClick="ListSnippets_OnMouseDoubleClick" 
                              KeyUp="ListSnippets_KeyUp"
                  >
@@ -96,7 +97,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                               
                 <RowDefinition  Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Margin="0,0,0,4">Snippet Name</TextBlock>
@@ -113,11 +113,7 @@
             </ComboBox>
 
             <TextBlock Grid.Row="4" Margin="0,10,0,0">Snippet Template</TextBlock>
-            <TextBox  Grid.Row="5" Text="{Binding ActiveSnippet.SnippetText}"                       
-                      TextWrapping="Wrap" AcceptsReturn="True"
-                      ToolTip="The snippet text that is to be expanded into the active document. Depending on your script mode you can embed {{ C# Expressions }} or C# @Razor expressions into the page."
-                       FontFamily="Consolas" Margin="0,0,0,20"
-                      />
+            <WebBrowser Grid.Row="5"  Margin="0,0,0,15" Name="WebBrowserSnippet"/>
 
 
         </Grid>
