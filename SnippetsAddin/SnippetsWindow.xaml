@@ -94,14 +94,28 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                               
                 <RowDefinition  Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0">Name</TextBlock>
+            <TextBlock Grid.Row="0" Margin="0,0,0,4">Snippet Name</TextBlock>
             <TextBox  Grid.Row="1" Text="{Binding ActiveSnippet.Name, UpdateSourceTrigger=PropertyChanged }" />
 
-            <TextBlock Grid.Row="2" Margin="0,10,0,0">Snippet</TextBlock>
-            <TextBox  Grid.Row="3" Text="{Binding ActiveSnippet.SnippetText}"                       
+            <TextBlock Grid.Row="2" Margin="0,10,0,4">Script Mode</TextBlock>
+            <ComboBox Grid.Row="3" Name="ListScriptModes"                       
+                      ItemsSource="{Binding ScriptModeItems}"     
+                      SelectedValuePath="ScriptMode"
+                      DisplayMemberPath="Name"
+                      SelectedValue="{Binding ActiveSnippet.ScriptMode}"                      
+                      IsSynchronizedWithCurrentItem="True"                      
+                      >
+            </ComboBox>
+
+            <TextBlock Grid.Row="4" Margin="0,10,0,0">Snippet Template</TextBlock>
+            <TextBox  Grid.Row="5" Text="{Binding ActiveSnippet.SnippetText}"                       
                       TextWrapping="Wrap" AcceptsReturn="True"
+                      ToolTip="The snippet text that is to be expanded into the active document. Depending on your script mode you can embed {{ C# Expressions }} or C# @Razor expressions into the page."
                        FontFamily="Consolas" Margin="0,0,0,20"
                       />
 

@@ -50,6 +50,8 @@ namespace SnippetsAddin
             Loaded += SnippetsWindow_Loaded;
             Unloaded += SnippetsWindow_Unloaded;
 
+            
+
             DataContext = Model;            
         }
 

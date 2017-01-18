@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using MarkdownMonster;
@@ -10,14 +11,29 @@ namespace SnippetsAddin
 {
     public class SnippetsAddinModel : INotifyPropertyChanged
     {
-    
-        public SnippetsAddin Addin { get; set;  }
+
+        public SnippetsAddinModel()
+        {
+            ScriptModeItems = new List<ScriptModeItem>
+            {
+                new ScriptModeItem
+                {
+                    Name = "C# Expressions",
+                    ScriptMode = ScriptModes.CSharpExpressions
+                },
+                new ScriptModeItem
+                {
+                    Name = "C# Razor Template",
+                    ScriptMode = ScriptModes.Razor
+                },
+            };
+        }
 
 
-        
+        public SnippetsAddin Addin { get; set;  }               
+
         public MainWindow Window { get; set; }
-
-        [JsonIgnore]
+                
         public AppModel AppModel
         {
             get { return _appModel; }
@@ -42,7 +58,19 @@ namespace SnippetsAddin
             }
         }
         private Snippet _activeSnippet;
+        
 
+        public List<ScriptModeItem> ScriptModeItems
+        {
+            get { return _scriptModeItems; }
+            set
+            {
+                if (Equals(value, _scriptModeItems)) return;
+                _scriptModeItems = value;
+                OnPropertyChanged();
+            }
+        }
+        private List<ScriptModeItem> _scriptModeItems;
 
         public SnippetsAddinConfiguration Configuration { get; set; }
 
@@ -56,5 +84,13 @@ namespace SnippetsAddin
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+    }
+
+    public class ScriptModeItem
+    {
+        public string Name {
+            get;
+            set; }
+        public ScriptModes ScriptMode { get; set; } = ScriptModes.CSharpExpressions;
     }
 }

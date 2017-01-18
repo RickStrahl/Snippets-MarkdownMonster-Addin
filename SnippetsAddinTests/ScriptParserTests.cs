@@ -70,6 +70,42 @@ Time is {{DateTime.Now.ToString(""MMM dd, yyyy HH:mm:ss"")}}
 
         }
 
+
+        [TestMethod]
+        public void EvalScriptRazor()
+        {
+            string script = @"Hi @Model.Name,
+
+Time is @DateTime.Now.ToString(""MMM dd, yyyy HH:mm:ss"")
+";
+
+            var parser = new ScriptParser();
+            string result = parser.EvaluateRazorScript(script, new Globals { Name = "Rick" });
+
+            Assert.IsNotNull(result, "Parser failed to parse script: " + parser.ErrorMessage);
+            Console.WriteLine(result);
+        }
+
+        [TestMethod]
+        public void EvalScriptRazor2()
+        {
+            
+            string script = @"Hi @Model.Name,
+
+@for(int x=1;  x < 10; x++) {
+     <text>Item @x</text>
+}
+
+Time is @DateTime.Now.ToString(""MMM dd, yyyy HH:mm:ss"")
+";
+
+            var parser = new ScriptParser();
+            string result = parser.EvaluateRazorScript(script, new Globals { Name = "Rick" });
+
+            Assert.IsNotNull(result, "Parser failed to parse script: " + parser.ErrorMessage);
+            Console.WriteLine(result);
+        }
+
         [TestMethod]
         public async Task ScriptTest()
         {

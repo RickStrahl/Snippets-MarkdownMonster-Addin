@@ -11,7 +11,14 @@ namespace SnippetsAddin
 {
     public class Snippet : INotifyPropertyChanged
     {
+        public Snippet()
+        {
+            ScriptMode = ScriptModes.CSharpExpressions;
+        }
         
+        /// <summary>
+        /// A display name for the snippet.
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -25,6 +32,9 @@ namespace SnippetsAddin
         private string _name;
 
 
+        /// <summary>
+        /// The actual snippet text to embed and evaluate
+        /// </summary>
         public string SnippetText
         {
             get { return _snippetText; }
@@ -33,6 +43,9 @@ namespace SnippetsAddin
                 if (value == _snippetText) return;
                 _snippetText = value;
                 OnPropertyChanged();
+
+                // clear compiled id - might need to recompile
+                CompiledId = null;
             }
         }
         private string _snippetText;
@@ -49,7 +62,38 @@ namespace SnippetsAddin
         }
         private string _shortCut;
 
-        public string ExpansionShortCut { get; set; }
+        
+
+        public string ExpansionShortCut
+        {
+            get { return _expansionShortCut; }
+            set
+            {
+                if (value == _expansionShortCut) return;
+                _expansionShortCut = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _expansionShortCut;
+
+        public ScriptModes ScriptMode
+        {
+            get { return _scriptMode; }
+            set
+            {
+                if (value == _scriptMode) return;
+                _scriptMode = value;
+                OnPropertyChanged();
+            }
+        }
+        private ScriptModes _scriptMode;
+
+        /// <summary>
+        /// Id assigned to a compiled bit of script
+        /// </summary>
+        public string CompiledId { get; set;  }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -57,6 +101,15 @@ namespace SnippetsAddin
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+    }
+
+
+    public enum ScriptModes
+    {
+        // {{ expr syntax}}         
+        CSharpExpressions, 
+        // @Razor sytnax 
+        Razor     
     }
    
 }

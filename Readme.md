@@ -1,5 +1,4 @@
 ﻿# Snippets Markdown Monster Add-in
-
 <img src="SnippetsAddin.png" Height="128" />
 
 This project provides a simple snippet manager addin for the Markdown [Monster Markdown Editor and Weblog Publisher](https://markdownmonster.west-wind.com). The addin lets you embed saved text snippets with optional C# expressions into your Markdown Monster document. 
@@ -22,7 +21,8 @@ For example the following:
 
 ```html
 <div class="small">
-   created by, Rick Strahl, on {{DateTime.Now.ToString("MMM dd, yyyy")}}
+   created by, Rick Strahl, on 
+   {{DateTime.Now.ToString("MMM dd, yyyy")}}
 </div>   
 ```
 

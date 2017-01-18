@@ -62,7 +62,9 @@ namespace SnippetsAddin
         {
 
             string snippetText = snippet.SnippetText;
-            if (snippetText.Contains("{{"))
+
+
+            if (snippet.ScriptMode == ScriptModes.CSharpExpressions && snippetText.Contains("{{"))
             {
                 var parser = new ScriptParser();
                 snippetText = parser.EvaluateScript(snippetText, Model);
@@ -72,8 +74,18 @@ namespace SnippetsAddin
                     return;
                 }
             }
+            else if (snippet.ScriptMode == ScriptModes.Razor && snippetText.Contains("@"))
+            {
+                var parser = new ScriptParser();
+                snippetText = parser.EvaluateRazorScript(snippetText, Model);
+                if (snippetText == null)
+                {
+                    MessageBox.Show("Snippet execution failed:  " + parser.ErrorMessage);
+                    return;
+                }
+            }
 
-            
+
             this.SetSelection(snippetText);
         }
 
