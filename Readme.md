@@ -1,9 +1,9 @@
 ﻿# Snippets Markdown Monster Add-in
 <img src="SnippetsAddin.png" Height="128" />
 
-This project provides a simple snippet manager addin for the Markdown [Monster Markdown Editor and Weblog Publisher](https://markdownmonster.west-wind.com). The addin lets you embed saved text snippets with optional C# expressions into your Markdown Monster document. 
+This project provides a simple snippet manager addin for the Markdown [Monster Markdown Editor and Weblog Publisher](https://markdownmonster.west-wind.com). The addin lets you embed expanded snippets with optional C# expressions or C# Razor code into your Markdown Monster document. 
 
-You can store and select from a list of text based snippets that you can embed into your Markdown or HTML documents by double clicking, pressing `ENTER` or `SPACE`.
+You can store and select from a list of text based snippets that you can embed into your Markdown or HTML documents by **double clicking**, pressing `ENTER` or `SPACE`.
 
 ![](ScreenShot.png)
 

@@ -7,6 +7,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using MahApps.Metro.Controls;
+using MarkdownMonster;
 using Westwind.RazorHosting;
 using Westwind.Utilities;
 //using Microsoft.CodeAnalysis.CSharp.Scripting;
@@ -91,7 +96,13 @@ namespace SnippetsAddin
                 {
                     _razorHost = new RazorStringHostContainer();
                     _razorHost.UseAppDomain = false;
+
+                    RazorHost.AddAssemblyFromType(typeof(MainWindow));
+
+                    RazorHost.ReferencedNamespaces.Add("MarkdownMonster");
+                                        
                     _razorHost.Start();
+                                    
                 }
                 return _razorHost;
             }

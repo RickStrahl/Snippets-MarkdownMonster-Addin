@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dragablz, Version=0.0.3.181, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Markdown Monster\Dragablz.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="FontAwesome.WPF">
       <HintPath>$(ProgramFiles)\Markdown Monster\FontAwesome.WPF.dll</HintPath>
       <Private>False</Private>

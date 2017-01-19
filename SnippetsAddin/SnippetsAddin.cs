@@ -10,6 +10,8 @@ namespace SnippetsAddin
 {
     public class SnippetsAddin : MarkdownMonster.AddIns.MarkdownMonsterAddin
     {
+        private SnippetsWindow snippetsWindow;
+
         public override void OnApplicationStart()
         {
             base.OnApplicationStart();
@@ -35,13 +37,17 @@ namespace SnippetsAddin
         }
 
         public override void OnExecute(object sender)
-        {            
-            var form = new SnippetsWindow(this);
+        {
+            if (snippetsWindow == null || snippetsWindow.Visibility != Visibility.Visible)
+            {
+                snippetsWindow = new SnippetsWindow(this);
 
-            form.Top = Model.Window.Top;
-            form.Left = Model.Window.Left + Model.Window.Width - Model.Configuration.WindowPosition.SplitterPosition;
-
-            form.Show();            
+                snippetsWindow.Top = Model.Window.Top;
+                snippetsWindow.Left = Model.Window.Left + Model.Window.Width -
+                                      Model.Configuration.WindowPosition.SplitterPosition;
+            }
+            snippetsWindow.Show();
+            snippetsWindow.Activate();
         }
 
         public override void OnExecuteConfiguration(object sender)
@@ -99,7 +105,8 @@ namespace SnippetsAddin
             if (string.IsNullOrEmpty(snippetText))
                 return;
             
-            this.SetSelection(snippetText);
+            SetSelection(snippetText);
+                                                
         }
 
         public override void OnDocumentUpdated()
