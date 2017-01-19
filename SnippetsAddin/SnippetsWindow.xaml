@@ -12,7 +12,7 @@
         WindowStyle="SingleBorderWindow" ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterOwner"         
         IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False"                       
-        Width="900" Height="700" MinHeight="700"                       
+        Width="900" Height="700" MinHeight="500"  MinWidth="700"                     
         Icon="icon.png"
          WindowTransitionsEnabled="False"                       
                        >
