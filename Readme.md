@@ -28,19 +28,34 @@ For example the following:
 
 embeds a date into the snippet when it's created. Snippets can embed **any** text since Markdown supports both plain text as well as HTML markup as in the example above.
 
-You also get access to the full Addin model that exposes a large chunk of Markdown Monsters active document, editor and UI using a `Model property. 
+You also get access to the full Addin model that exposes a large chunk of Markdown Monsters active document, editor and UI using a `Model property.
 
-For example, if you want to get the current filename:
+For example:
 
-```Markdown
-Main Window Title:  {{Model.Window.Title}}. 
-
-Time is: {{DateTime.Now}}
-
-Filename: {{Model.ActiveDocument.Filename}}
+```html
+Full Filename: @Model.ActiveDocument.Filename
 ```
 
 You only get to apply expressions, but that gives you a fair bit of functionality you can work with.
+
+
+### Embed C# Razor Code
+If you need more control, you can also use ASP.NET Style Razor syntax for snippets. Here's an example of using Razor to embed expressions and run code snippets.
+
+The following template accesses the Markdown Monster Model data to get data out of the documents.
+
+```html
+Main Window Title:  @Model.Window.Title. 
+
+Timestamp: @DateTime.Now.ToString("MMM dd, yyy")
+
+Filename: @Model.ActiveDocument.Filename
+
+Open Documents:
+@foreach(var doc in Model.OpenDocuments) {
+    <text>* @doc.Filename</text>
+}
+```
 
 > #### Early pre-release
 > This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
