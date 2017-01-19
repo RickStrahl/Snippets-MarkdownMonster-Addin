@@ -38,7 +38,7 @@ namespace SnippetsAddin
 
         public override void OnExecute(object sender)
         {
-            if (snippetsWindow == null || snippetsWindow.Visibility != Visibility.Visible)
+            if (snippetsWindow == null || !snippetsWindow.IsLoaded)
             {
                 snippetsWindow = new SnippetsWindow(this);
 
