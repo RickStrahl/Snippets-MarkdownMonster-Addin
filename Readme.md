@@ -45,6 +45,11 @@ You only get to apply expressions, but that gives you a fair bit of functionalit
 > #### Early pre-release
 > This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
 
+### Expansion Keys
+You can also create a *shortcut* extension key combination. When you type the key sequence and wait for the type timeout (around 800ms) the snippet is expanded in place to allow for keyboard based extension.
+
+For example, in the screen shot the **rdt** combination is set up for the script. So if I type **rdt** in the editor and wait for a second the associated snippet is expanded.
+
 ### Open for Feedback
 Currently this is just a first cut for snippets. There are a number of things that can be done with this but I'm curious how people might want to use this.
 
