@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using FontAwesome.WPF;
 using MarkdownMonster;
@@ -55,12 +56,12 @@ namespace SnippetsAddin
 
 
         /// <summary>
-        /// Inserts a selected snippet into the current document
+        /// Helper function that returns the snippet text that's to be inserted
         /// </summary>
         /// <param name="snippet"></param>
-        public void InsertSnippet(Snippet snippet)
+        /// <returns></returns>
+        public string GetEvaluatedSnippetText(Snippet snippet)
         {
-
             string snippetText = snippet.SnippetText;
 
 
@@ -71,7 +72,7 @@ namespace SnippetsAddin
                 if (snippetText == null)
                 {
                     MessageBox.Show("Snippet execution failed:  " + parser.ErrorMessage);
-                    return;
+                    return null;
                 }
             }
             else if (snippet.ScriptMode == ScriptModes.Razor && snippetText.Contains("@"))
@@ -81,12 +82,41 @@ namespace SnippetsAddin
                 if (snippetText == null)
                 {
                     MessageBox.Show("Snippet execution failed:  " + parser.ErrorMessage);
-                    return;
+                    return null;
                 }
             }
 
+            return snippetText;
+        }
 
+        /// <summary>
+        /// Inserts a selected snippet into the current document
+        /// </summary>
+        /// <param name="snippet"></param>
+        public void InsertSnippet(Snippet snippet)
+        {
+            var snippetText = GetEvaluatedSnippetText(snippet);
+            if (string.IsNullOrEmpty(snippetText))
+                return;
+            
             this.SetSelection(snippetText);
+        }
+
+        public override void OnDocumentUpdated()
+        {
+            base.OnDocumentUpdated();
+
+            var editor = GetMarkdownEditor();
+            string line = editor.GetCurrentLine();
+            if (string.IsNullOrEmpty(line))
+                return;            
+            
+            var snippet = SnippetsAddinConfiguration.Current.Snippets.FirstOrDefault(sn => sn.ShortCut != null && line.Trim().EndsWith(sn.ShortCut));
+            if (snippet != null)
+            {
+                var snippetText = GetEvaluatedSnippetText(snippet);
+                editor.FindAndReplaceTextInCurrentLine(snippet.ShortCut, snippetText);                
+            }
         }
 
         //public override void OnDocumentUpdated()
@@ -102,12 +132,12 @@ namespace SnippetsAddin
         //        editor.SetMarkdown();
         //    }
 
-//////        selectionRange = editor.getSelectionRange();
+        //////        selectionRange = editor.getSelectionRange();
 
-//////startLine = selectionRange.start.row;
-//////endLine = selectionRange.end.row;
+        //////startLine = selectionRange.start.row;
+        //////endLine = selectionRange.end.row;
 
-//////content = editor.session.getTextRange(selectionRange);
+        //////content = editor.session.getTextRange(selectionRange);
 
         //}
     }

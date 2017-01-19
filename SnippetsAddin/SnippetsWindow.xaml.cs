@@ -51,7 +51,7 @@ namespace SnippetsAddin
             Loaded += SnippetsWindow_Loaded;
             Unloaded += SnippetsWindow_Unloaded;
 
-            
+            WebBrowserSnippet.Visibility = Visibility.Hidden;
 
             DataContext = Model;            
         }
@@ -116,6 +116,9 @@ namespace SnippetsAddin
         }
 
 
+
+        private string LastChars = string.Empty;
+
         private void ListSnippets_KeyUp(object sender, KeyEventArgs e)
         {
             
@@ -125,6 +128,9 @@ namespace SnippetsAddin
                 if (snippet != null)
                     Model.Addin.InsertSnippet(snippet);
             }
+
+           
+            
         }
 
         private void ListSnippets_SelectionChanged(object sender, SelectionChangedEventArgs e)

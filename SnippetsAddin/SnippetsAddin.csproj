@@ -40,8 +40,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="MarkdownMonster">
-      <HintPath>$(ProgramFiles)\Markdown Monster\MarkdownMonster.exe</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\MarkdownMonster\MarkdownMonster\bin\Debug\MarkdownMonster.exe</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -8,12 +8,14 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"                            
         Title="Snippets" TitleCharacterCasing="Normal"        
-        FontSize="14"                          
+        FontSize="14"                              
         WindowStyle="SingleBorderWindow" ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterOwner"         
         IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False"                       
         Width="900" Height="700" MinHeight="700"                       
-                       Icon="icon.png">
+        Icon="icon.png"
+         WindowTransitionsEnabled="False"                       
+                       >
     
     <Grid>
             <Grid.ColumnDefinitions>
@@ -84,15 +86,13 @@
                              IsTextSearchCaseSensitive="False"
                              IsTextSearchEnabled="True"                   
                              HorizontalContentAlignment="Stretch"
-                 SelectionChanged="ListSnippets_SelectionChanged"
+                             SelectionChanged="ListSnippets_SelectionChanged"
                              MouseDoubleClick="ListSnippets_OnMouseDoubleClick" 
-                             KeyUp="ListSnippets_KeyUp"
-                 >
+                             KeyUp="ListSnippets_KeyUp">
         </ListBox>
 
         <Grid Grid.Row="1" Grid.Column="1"  Margin="10,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -102,18 +102,34 @@
             <TextBlock Grid.Row="0" Margin="0,0,0,4">Snippet Name</TextBlock>
             <TextBox  Grid.Row="1" Text="{Binding ActiveSnippet.Name, UpdateSourceTrigger=PropertyChanged }" />
 
-            <TextBlock Grid.Row="2" Margin="0,10,0,4">Script Mode</TextBlock>
-            <ComboBox Grid.Row="3" Name="ListScriptModes"                       
+            <Grid Grid.Row="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel>
+                    <TextBlock Grid.Row="2" Margin="0,10,0,4">Script Mode</TextBlock>
+                    <ComboBox Grid.Row="3" Name="ListScriptModes"                       
                       ItemsSource="{Binding ScriptModeItems}"     
                       SelectedValuePath="ScriptMode"
                       DisplayMemberPath="Name"
                       SelectedValue="{Binding ActiveSnippet.ScriptMode}"                      
                       IsSynchronizedWithCurrentItem="True"                      
                       >
-            </ComboBox>
+                    </ComboBox>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                    <TextBlock  Margin="0,10,0,4">Expansion Keys (at end of line)</TextBlock>
+                    <TextBox Text="{Binding ActiveSnippet.ShortCut}"  ToolTip="Key sequence that when typed into the editor at the end of a line, will expand the snippet."  />                   
+                      
+                </StackPanel>
 
-            <TextBlock Grid.Row="4" Margin="0,10,0,0">Snippet Template</TextBlock>
-            <WebBrowser Grid.Row="5"  Margin="0,0,0,15" Name="WebBrowserSnippet"/>
+            </Grid>
+
+            <TextBlock Grid.Row="3" Margin="0,10,0,4">Snippet Template</TextBlock>
+            <WebBrowser Grid.Row="4"  Margin="0,0,0,15" Name="WebBrowserSnippet"/>
 
 
         </Grid>
