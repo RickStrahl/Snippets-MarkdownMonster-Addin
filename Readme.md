@@ -14,6 +14,10 @@ Snippets make a great use case for:
 * Prefilled Bug Reports
 * Timestamping documents
 
+
+> #### Early pre-release
+> This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
+
 ### Embed C# Code Expressions
 Snippets can contain embedded C# code expressions using `{{ expression }}` syntax which is evaluated when the snippet is rendered.
 
@@ -33,7 +37,7 @@ You also get access to the full Addin model that exposes a large chunk of Markdo
 For example:
 
 ```html
-Full Filename: @Model.ActiveDocument.Filename
+Full Filename: {{Model.ActiveDocument.Filename}}
 ```
 
 You only get to apply expressions, but that gives you a fair bit of functionality you can work with.
@@ -57,8 +61,6 @@ Open Documents:
 }
 ```
 
-> #### Early pre-release
-> This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
 
 ### Expansion Keys
 You can also create a *shortcut* extension key combination. When you type the key sequence and wait for the type timeout (around 800ms) the snippet is expanded in place to allow for keyboard based extension.
