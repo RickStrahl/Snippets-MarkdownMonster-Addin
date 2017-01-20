@@ -98,9 +98,16 @@ namespace SnippetsAddin
                     _razorHost.UseAppDomain = false;
 
                     RazorHost.AddAssemblyFromType(typeof(MainWindow));
+                    //RazorHost.AddAssemblyFromType(typeof(StringUtils));
+
+                    //RazorHost.ReferencedAssemblies.Add("Westwind.Utilities");
 
                     RazorHost.ReferencedNamespaces.Add("MarkdownMonster");
-                                        
+                    //RazorHost.ReferencedNamespaces.Add("Westwind.Utilities");
+                    RazorHost.ReferencedNamespaces.Add("System.IO");
+                    RazorHost.ReferencedNamespaces.Add("System.Text");
+
+
                     _razorHost.Start();
                                     
                 }
@@ -121,10 +128,36 @@ namespace SnippetsAddin
         {
             string result = null;
 
+            var snippetLines = StringUtils.GetLines(snippet);
+            var sb = new StringBuilder();
+            foreach (var line in snippetLines)
+            {
+                if (line.Trim().Contains("@reference "))
+                {
+                    string assemblyName = line.Replace("@reference ", "").Trim();
+
+                    // Add to Engine since host is already instantiated
+                    RazorHost.Engine.AddAssembly(assemblyName);
+                    continue;
+                }
+                if (line.Trim().Contains("@using "))
+                {
+                    string ns = line.Replace("@using ", "").Trim();
+
+                    // Add to Engine since host is already instantiated
+                    RazorHost.Engine.AddNamespace(ns);                                            
+                    continue;
+                }
+
+                sb.AppendLine(line);
+            }
+
+            snippet = sb.ToString();
+
             // Render the actual template and pass the model
             result = RazorHost.RenderTemplate(snippet,state);
             if (result == null)
-                ErrorMessage = RazorHost.ErrorMessage + "\r\n" + RazorHost.Engine.LastGeneratedCode;
+                ErrorMessage = RazorHost.ErrorMessage;
 
             return result;
         }
