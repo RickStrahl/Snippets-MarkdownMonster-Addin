@@ -133,6 +133,12 @@ namespace SnippetsAddin
                 {
                     string assemblyName = line.Replace("@reference ", "").Trim();
 
+                    if (assemblyName.Contains("\\") || assemblyName.Contains("//"))
+                    {
+                        ErrorMessage = "Assemblies loaded from external folders are not allowed: " + assemblyName;
+                        return null;
+                    }
+
                     // Add to Engine since host is already instantiated
                     RazorHost.Engine.AddAssembly(assemblyName);
                     continue;

@@ -1,4 +1,4 @@
-﻿# Snippets Markdown Monster Add-in
+﻿
 <img src="SnippetsAddin.png" Height="128" />
 
 This project provides a simple snippet manager addin for the Markdown [Monster Markdown Editor and Weblog Publisher](https://markdownmonster.west-wind.com). The addin lets you embed expanded snippets with optional C# expressions or C# Razor code into your Markdown Monster document. 
@@ -32,6 +32,7 @@ For example the following:
 
 embeds a date into the snippet when it's created. Snippets can embed **any** text since Markdown supports both plain text as well as HTML markup as in the example above.
 
+#### Access to the Addin Model
 You also get access to the full Addin model that exposes a large chunk of Markdown Monsters active document, editor and UI using a `Model property.
 
 For example:
@@ -40,13 +41,16 @@ For example:
 Full Filename: {{Model.ActiveDocument.Filename}}
 ```
 
+For more info on what's available check out the documentation or take a look at the Markdown Monster source code:
+* [Accessing and manipulating the Active Editor Document](http://markdownmonster.west-wind.com/docs/_4nf02q0sz.htm)
+
+
 You only get to apply expressions, but that gives you a fair bit of functionality you can work with.
 
-
 ### Embed C# Razor Code
-If you need more control, you can also use ASP.NET Style Razor syntax for snippets. Here's an example of using Razor to embed expressions and run code snippets.
+If you need more control, you can also use ASP.NET Style Razor syntax for snippets. As with expressions the `Model` is also available in @Razor snippets.
 
-The following template accesses the Markdown Monster Model data to get data out of the documents.
+The following template example accesses the Markdown Monster Model data to get data out of the documents.
 
 ```html
 Main Window Title:  @Model.Window.Title. 
@@ -58,6 +62,80 @@ Filename: @Model.ActiveDocument.Filename
 Open Documents:
 @foreach(var doc in Model.OpenDocuments) {
     <text>* @doc.Filename</text>
+}
+```
+
+Here's another example that creates a **Front Matter** blog header which deduces the title from the filename
+
+```csharp
+@{
+    var file = Path.GetFileNameWithoutExtension(
+                                 Model.ActiveDocument.Filename);
+    file = StringUtils.FromCamelCase(file);
+    file = file.Replace("-"," ");
+}---
+Title: @file
+Timestamp: @DateTime.Now.ToString("MMM dd, yyyy HH:mm")
+Tags:
+-
+---
+```
+
+Note that this example, relies on pre-loaded namespaces and assembly references. `System.IO` (namespace) and `Westwind.Utilities` (assembly and namespace) which are pre-loaded as part of the Razor Host startup. 
+
+#### Loading Assemblies and Namespaces
+Any non-standard assemblies you might want to reference from the GAC or from disk, you have to explicitly add to your templates.  
+
+If you want to explicitly load an assembly and namespace you can do so by using the `@reference` and `@namespace` directives. 
+
+> #### @reference must load out of the Install Folder
+> Any references **must be** loaded out of the Markdown Monster install folder. This limitation is deliberate to prevent script highjacking and requiring custom assemblies to be copied into only into a privileged folder on the local machine.
+
+Here's a silly example that demonstrates showing a message as part of a template.
+
+```
+@reference System.Windows.Forms.dll
+@using System.Windows.Forms
+@{
+    MessageBox.Show("hello world");
+}
+<div class="small">created on @DateTime.Now.ToString("d")</div>
+```
+
+Note assemblies have to be referenced with the `.dll` extension and have to be loaded out of the Markdown Monster install folder. They cannot have a path associated with it to limit security exposure as you need elevated rights to put a DLL into the installation folder (`Program Files\MarkdownMonster`).
+
+#### Note: Razor Expressions are Html Encoded by Default
+Because the engine is the ASP.NET Razor engine strings returned from `@expressions` are by default formatted to Html encoded text. For example:
+
+```html
+@{
+    var htmlString = "<div class='Header1'>Huuge</div>";
+}
+@htmlString
+```
+
+produces: `&lt;div class='Header1'&gt;>Huuge&lt;/div&gt;`.
+
+If content you are creating shouldn't be HTML encoded you can use `@Html.Raw(expression)`:
+
+```html
+@{
+    var htmlString = "<div class='Header1'>Huuge</div>";
+}
+@Html.Raw(htmlString)
+```
+
+Since Markdown is HTML aware however, in most cases HTML encoded strings will actually render correctly as Markdown so the use case for `@Html.Raw()` should be fairly minimal
+
+
+#### Razor @helpers
+You can also use Razor helpers in a snippet:
+
+```html
+Message is: @HelloWorld("Rick")
+
+@helper HelloWorld(string name) {
+    <div>Hello world, @name! Time is: @DateTime.Now.ToString("d")</div>  
 }
 ```
 
