@@ -60,6 +60,11 @@ namespace SnippetsAddin
             return true;
         }
 
+        public override void OnApplicationShutdown()
+        {
+            snippetsWindow?.Close();
+        }
+
 
         /// <summary>
         /// Helper function that returns the snippet text that's to be inserted
