@@ -97,16 +97,13 @@ namespace SnippetsAddin
                     _razorHost = new RazorStringHostContainer();
                     _razorHost.UseAppDomain = false;
 
-                    RazorHost.AddAssemblyFromType(typeof(MainWindow));
-                    //RazorHost.AddAssemblyFromType(typeof(StringUtils));
-
-                    //RazorHost.ReferencedAssemblies.Add("Westwind.Utilities");
+                    RazorHost.AddAssemblyFromType(typeof(MainWindow));   // MarkdownMonster.exe
+                    RazorHost.AddAssemblyFromType(typeof(StringUtils));  // Westwind.Utilities
 
                     RazorHost.ReferencedNamespaces.Add("MarkdownMonster");
-                    //RazorHost.ReferencedNamespaces.Add("Westwind.Utilities");
+                    RazorHost.ReferencedNamespaces.Add("Westwind.Utilities");
                     RazorHost.ReferencedNamespaces.Add("System.IO");
                     RazorHost.ReferencedNamespaces.Add("System.Text");
-
 
                     _razorHost.Start();
                                     
