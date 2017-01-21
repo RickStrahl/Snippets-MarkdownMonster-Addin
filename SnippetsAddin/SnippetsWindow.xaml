@@ -115,7 +115,8 @@
                       SelectedValuePath="ScriptMode"
                       DisplayMemberPath="Name"
                       SelectedValue="{Binding ActiveSnippet.ScriptMode}"                      
-                      IsSynchronizedWithCurrentItem="True"                      
+                      IsSynchronizedWithCurrentItem="True"   SelectionChanged="ListScriptModes_SelectionChanged"
+                   
                       >
                     </ComboBox>
                 </StackPanel>

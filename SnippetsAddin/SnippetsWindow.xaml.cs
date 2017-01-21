@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 using MarkdownMonster;
-using Newtonsoft.Json;
-using Westwind.Utilities;
 
 namespace SnippetsAddin
 {
@@ -45,9 +32,13 @@ namespace SnippetsAddin
             if (Model.Configuration.Snippets == null)
                 Model.Configuration.Snippets = new System.Collections.ObjectModel.ObservableCollection<Snippet>();
             else
+            {
                 Model.Configuration.Snippets =
                     new ObservableCollection<Snippet>(Model.Configuration.Snippets.OrderBy(snip => snip.Name));
-            
+                if (Model.Configuration.Snippets.Count > 0)
+                    Model.ActiveSnippet = Model.Configuration.Snippets[0];
+            }
+
             Loaded += SnippetsWindow_Loaded;
             Unloaded += SnippetsWindow_Unloaded;
 
@@ -115,10 +106,6 @@ namespace SnippetsAddin
             SnippetsAddinConfiguration.Current.Snippets.Remove(snippet);
         }
 
-
-
-        private string LastChars = string.Empty;
-
         private void ListSnippets_KeyUp(object sender, KeyEventArgs e)
         {
             
@@ -128,9 +115,6 @@ namespace SnippetsAddin
                 if (snippet != null)
                     Model.Addin.InsertSnippet(snippet);
             }
-
-           
-            
         }
 
         private void ListSnippets_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -140,5 +124,16 @@ namespace SnippetsAddin
                 editor?.SetMarkdown(snippet.SnippetText);
         }
 
+        private void ListScriptModes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Model.ActiveSnippet == null)
+                return;
+
+            //if (Model.ActiveSnippet.ScriptMode == ScriptModes.CSharpExpressions)
+            //    editor?.SetEditorSyntax("markdown");
+            //else
+            //    editor?.SetEditorSyntax("razor");
+
+        }
     }
 }
