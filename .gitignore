@@ -20,6 +20,7 @@ Thumbs.db
 *.log
 [Bb]in
 [Dd]ebug*/
+.idea
 *.lib
 *.sbr
 *.nupkg

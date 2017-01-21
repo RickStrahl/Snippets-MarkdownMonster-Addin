@@ -4,9 +4,9 @@
     "summary": "Create reusable text snippets with optional embedded code expressions to embed into your documents.",
     "description": "The Snippets addin allows you to create reusable text snippets that you can use to embed text into your documents.\r\nSnippets can contain C# expressions or @Razor style script code to make the content dynamic.",
     "releaseNotes": "Initial release",
-    "version": "0.1.10",
+    "version": "0.2",
     "author": "Rick Strahl, © West Wind Technologies",
-    "updated": "2017-1-20T12:00:00Z"
+    "updated": "2017-1-21T12:00:00Z"
 }
 
 
