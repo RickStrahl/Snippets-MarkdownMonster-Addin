@@ -109,9 +109,26 @@ namespace SnippetsAddin
             var snippetText = GetEvaluatedSnippetText(snippet);
             if (string.IsNullOrEmpty(snippetText))
                 return;
-            
+
+            int idx = snippetText.IndexOf("~");
+            snippetText = snippetText.Replace("~", "");
+
             SetSelection(snippetText);
-                                                
+            
+            if (idx > -1)
+            {
+                var snipRemain = snippetText.Substring(idx);                               
+                int move = snipRemain.Replace("\r","").Length;
+
+                // older versions don't have these APIs
+                try
+                {
+                    var editor = GetMarkdownEditor();
+                    editor.AceEditor.moveCursorLeft(move);                    
+                }
+                catch { }
+            }
+
         }
 
         public override void OnDocumentUpdated()
