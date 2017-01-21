@@ -120,8 +120,13 @@ namespace SnippetsAddin
         private void ListSnippets_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var snippet = ListSnippets.SelectedItem as Snippet;
+
+
             if (snippet != null)
-                editor?.SetMarkdown(snippet.SnippetText);
+            {
+                try { 
+                    editor?.SetMarkdown(snippet.SnippetText);
+                }catch { }}
         }
 
         private void ListScriptModes_SelectionChanged(object sender, SelectionChangedEventArgs e)
