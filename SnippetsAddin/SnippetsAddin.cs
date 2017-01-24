@@ -16,13 +16,13 @@ namespace SnippetsAddin
         {
             base.OnApplicationStart();
 
-            Id = " SnippetsAddin";
+            Id = "Snippets";
 
             // by passing in the add in you automatically
             // hook up OnExecute/OnExecuteConfiguration/OnCanExecute
             var menuItem = new AddInMenuItem(this)
             {
-                Caption = " SnippetsAddin",
+                Caption = "Snippets Template Expansions",
 
                 // if an icon is specified it shows on the toolbar
                 // if not the add-in only shows in the add-ins menu

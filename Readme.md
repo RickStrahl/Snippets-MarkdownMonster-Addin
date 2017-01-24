@@ -18,6 +18,15 @@ Snippets make a great use case for:
 > #### Early pre-release
 > This version is a pre-release version so installation and configuration is manual for now. Please see instructions below.
 
+
+### Dynamic Code Embedding
+Snippets support embedding of dynamic code using a couple of expression engines:
+
+* C# Expressions
+* C# @Razor Code
+
+In the future we might additional engines like a JavaScript Handlebars engine.
+
 ### Embed C# Code Expressions
 Snippets can contain embedded C# code expressions using `{{ expression }}` syntax which is evaluated when the snippet is rendered.
 
@@ -33,7 +42,7 @@ For example the following:
 embeds a date into the snippet when it's created. Snippets can embed **any** text since Markdown supports both plain text as well as HTML markup as in the example above.
 
 #### Access to the Addin Model
-You also get access to the full Addin model that exposes a large chunk of Markdown Monsters active document, editor and UI using a `Model property.
+You also get access to the full Addin model that exposes a large chunk of Markdown Monsters active document, editor and UI using a `Model` property.
 
 For example:
 
@@ -41,11 +50,14 @@ For example:
 Full Filename: {{Model.ActiveDocument.Filename}}
 ```
 
+Shows the currently open document's filename.
+
 For more info on what's available check out the documentation or take a look at the Markdown Monster source code:
+
 * [Accessing and manipulating the Active Editor Document](http://markdownmonster.west-wind.com/docs/_4nf02q0sz.htm)
 
 
-You only get to apply expressions, but that gives you a fair bit of functionality you can work with.
+Using this option, you only get to apply expressions and no code blocks, but that still gives you a fair bit of functionality you can work with.
 
 ### Embed C# Razor Code
 If you need more control, you can also use ASP.NET Style Razor syntax for snippets. As with expressions the `Model` is also available in @Razor snippets.
@@ -139,14 +151,28 @@ Message is: @HelloWorld("Rick")
 }
 ```
 
+### Cursor Position: ~ marks the Spot
+By default the cursor position for an expanded snippet is immediately after the expanded snippet. If you want to place the cursor inside of the snippets text somewhere you can place a `~` character in the place where you want to cursor to end up.
+
+```markdown
+---
+Title: 
+Timestamp: @DateTime.Now.ToString("MMM dd, yyyy HH:mm")
+Tags:
+- ~
+---
+```
+
+Here the cursor will end up at the first tag item to be entered (at the `-`).
 
 ### Expansion Keys
 You can also create a *shortcut* extension key combination. When you type the key sequence and wait for the type timeout (around 800ms) the snippet is expanded in place to allow for keyboard based extension.
 
-For example, in the screen shot the **rdt** combination is set up for the script. So if I type **rdt** in the editor and wait for a second the associated snippet is expanded.
+For example, in the screen shot the **fmatter** combination is set up for the script. So if I type **fmatter** in the editor and wait for a second the associated snippet is expanded. Note that the shortcut text to be expanded has to be at the end of the current line - text in the middle of a line is not expanded.
 
-### Open for Feedback
-Currently this is just a first cut for snippets. There are a number of things that can be done with this but I'm curious how people might want to use this.
+
+## Open for Feedback
+Currently this addin is still under development and we're open to ideas how to expand functionality. There are a number of things that can be done with this but I'm curious how people might want to use this:
 
 #### Scripting Engine
 Currently the templates use a simple **{{ Handlebar-like }}** expression syntax that can be embedded into a document. Another option might be to embed a full fledged **Razor Engine** using ASP.NET Style razor syntax to allow much more elaborate scripting.
