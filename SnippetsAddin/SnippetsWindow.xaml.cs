@@ -29,8 +29,20 @@ namespace SnippetsAddin
             };
 
 
-            if (Model.Configuration.Snippets == null)
+            if (Model.Configuration.Snippets == null || Model.Configuration.Snippets.Count < 1)
+            {
                 Model.Configuration.Snippets = new System.Collections.ObjectModel.ObservableCollection<Snippet>();
+                Model.Configuration.Snippets.Add(new Snippet
+                {
+                    Name = "Copyright Notice",
+                    ScriptMode = ScriptModes.CSharpExpressions,
+                    ShortCut = "copynotice",
+                    SnippetText = @"
+---
+&copy; My Company, {{DateTime.Now.ToString(""yyyy"")}};
+"
+                });
+            }
             else
             {
                 Model.Configuration.Snippets =

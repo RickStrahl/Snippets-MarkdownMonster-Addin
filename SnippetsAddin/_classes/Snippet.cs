@@ -64,17 +64,17 @@ namespace SnippetsAddin
 
         
 
-        public string ExpansionShortCut
-        {
-            get { return _expansionShortCut; }
-            set
-            {
-                if (value == _expansionShortCut) return;
-                _expansionShortCut = value;
-                OnPropertyChanged();
-            }
-        }
-        private string _expansionShortCut;
+        //public string ExpansionShortCut
+        //{
+        //    get { return _expansionShortCut; }
+        //    set
+        //    {
+        //        if (value == _expansionShortCut) return;
+        //        _expansionShortCut = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+        //private string _expansionShortCut;
 
         public ScriptModes ScriptMode
         {
