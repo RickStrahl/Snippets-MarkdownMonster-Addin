@@ -142,9 +142,9 @@ namespace SnippetsAddin
             
             var snippet = SnippetsAddinConfiguration.Current.Snippets.FirstOrDefault(sn => sn.ShortCut != null && line.Trim().EndsWith(sn.ShortCut));
             if (snippet != null)
-            {
-                var snippetText = GetEvaluatedSnippetText(snippet);
-                editor.FindAndReplaceTextInCurrentLine(snippet.ShortCut, snippetText);                
+            {                               
+                editor.FindAndReplaceTextInCurrentLine(snippet.ShortCut, "");
+                InsertSnippet(snippet);
             }
         }
 
