@@ -140,7 +140,7 @@ namespace SnippetsAddin
             if (output != null)
             {
                 output = output.Replace("~", "");
-                MessageBox.Show(output, "Snippet Output",
+                MessageBox.Show(output, "Snippet Test Output",
                     MessageBoxButton.OK,
                     MessageBoxImage.Asterisk);
             }
