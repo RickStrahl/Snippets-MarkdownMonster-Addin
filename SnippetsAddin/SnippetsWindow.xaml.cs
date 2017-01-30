@@ -73,9 +73,6 @@ namespace SnippetsAddin
                 initialValue = Model.Configuration.Snippets[0].SnippetText;
             }
 
-            ListSnippets.Focus();
-
-
             editor = new MarkdownEditorSimple(WebBrowserSnippet, initialValue);
             editor.IsDirtyAction =  () =>
             { 
@@ -85,6 +82,11 @@ namespace SnippetsAddin
 
                 return true;
             };
+
+            Dispatcher.InvokeAsync(() =>
+            {
+                ListSnippets.Focus();
+            },System.Windows.Threading.DispatcherPriority.ApplicationIdle);
         }
 
 
@@ -116,6 +118,32 @@ namespace SnippetsAddin
             if (snippet == null)
                 return;
             SnippetsAddinConfiguration.Current.Snippets.Remove(snippet);
+        }
+
+
+        private void ToolButtonRunSnippet_Click(object sender, RoutedEventArgs e)
+        {
+            var snippet = ListSnippets.SelectedItem as Snippet;
+            if (snippet == null)
+                return;
+
+            Model.Addin.InsertSnippet(snippet);
+        }
+
+        private void ToolButtonTestSnippet_Click(object sender, RoutedEventArgs e)
+        {
+            var snippet = ListSnippets.SelectedItem as Snippet;
+            if (snippet == null)
+                return;
+
+            string output = Model.Addin.GetEvaluatedSnippetText(snippet);
+            if (output != null)
+            {
+                output = output.Replace("~", "");
+                MessageBox.Show(output, "Snippet Output",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Asterisk);
+            }
         }
 
         private void ListSnippets_KeyUp(object sender, KeyEventArgs e)
@@ -152,5 +180,6 @@ namespace SnippetsAddin
             //    editor?.SetEditorSyntax("razor");
 
         }
+
     }
 }

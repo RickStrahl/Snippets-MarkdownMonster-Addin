@@ -64,11 +64,36 @@
                             <fa:FontAwesome Icon="Remove"  Foreground="Red"
                                             FontSize="15"                                                                                        
                                             FontWeight="Normal" FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" 
-                                            Margin="5,2,5,0">
+                                            Margin="5,2,10,0">
 
                             </fa:FontAwesome>
 
                             <TextBlock>Remove Snippet</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                </ToolBar>
+                <ToolBar>
+                    <Button Name="ToolButtonRunSnippet" Click="ToolButtonRunSnippet_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Play"  Foreground="Green"
+                                            FontSize="15"                                                                                        
+                                            FontWeight="Normal" FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" 
+                                            Margin="5,2,5,0">
+                            </fa:FontAwesome>
+
+                            <TextBlock>Run Snippet</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="ToolButtonTestSnippet" Click="ToolButtonTestSnippet_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="CaretSquareOutlineRight" Foreground="Orange"
+                                            FontSize="15"                                                                                        
+                                            FontWeight="Normal" FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" 
+                                            Margin="5,2,5,0">
+                            </fa:FontAwesome>
+
+                            <TextBlock>Test Snippet</TextBlock>
                         </StackPanel>
                     </Button>
                 </ToolBar>
