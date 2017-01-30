@@ -1,4 +1,4 @@
-﻿
+﻿# Markdown Monster Snippets Addin
 <img src="SnippetsAddin.png" Height="128" />
 
 This project provides a simple snippet manager addin for the Markdown [Monster Markdown Editor and Weblog Publisher](https://markdownmonster.west-wind.com). The addin lets you embed expanded snippets with optional C# expressions or C# Razor code into your Markdown Monster document. 
