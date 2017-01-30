@@ -1,7 +1,10 @@
 ﻿//if false
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -43,7 +46,7 @@ namespace SnippetsAddin
 
         
 
-        public object ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; }
 
 
 
@@ -99,11 +102,16 @@ namespace SnippetsAddin
 
                     RazorHost.AddAssemblyFromType(typeof(MainWindow));   // MarkdownMonster.exe
                     RazorHost.AddAssemblyFromType(typeof(StringUtils));  // Westwind.Utilities
-
+                    RazorHost.AddAssemblyFromType(typeof(DbConnection));  // System.Data
+                    RazorHost.AddAssemblyFromType(typeof(Graphics));  // System.Data
+                    
                     RazorHost.ReferencedNamespaces.Add("MarkdownMonster");
                     RazorHost.ReferencedNamespaces.Add("Westwind.Utilities");
                     RazorHost.ReferencedNamespaces.Add("System.IO");
                     RazorHost.ReferencedNamespaces.Add("System.Text");
+                    RazorHost.ReferencedNamespaces.Add("System.Drawing");
+                    RazorHost.ReferencedNamespaces.Add("System.Data");
+                    RazorHost.ReferencedNamespaces.Add("System.Data.SqlClient");                    
 
                     _razorHost.Start();
                                     
@@ -133,11 +141,17 @@ namespace SnippetsAddin
                 {
                     string assemblyName = line.Replace("@reference ", "").Trim();
 
-                    if (assemblyName.Contains("\\") || assemblyName.Contains("//"))
+                    if (assemblyName.Contains("\\") || assemblyName.Contains("/") )
                     {
-                        ErrorMessage = "Assemblies loaded from external folders are not allowed: " + assemblyName;
+                        ErrorMessage = "Assemblies loaded from external folders are not allowed: " + assemblyName +
+                                       "\r\n\r\n" +
+                                       "Referenced assemblies can only be loaded out of the Markdown Monster startup folder.";
                         return null;
                     }
+
+                    var fullAssemblyName = FileUtils.GetFullPath(assemblyName);
+                    if (File.Exists(fullAssemblyName))
+                        assemblyName = fullAssemblyName;
 
                     // Add to Engine since host is already instantiated
                     RazorHost.Engine.AddAssembly(assemblyName);

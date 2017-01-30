@@ -75,28 +75,21 @@ namespace SnippetsAddin
         {
             string snippetText = snippet.SnippetText;
 
+            var parser = new ScriptParser();
 
             if (snippet.ScriptMode == ScriptModes.CSharpExpressions && snippetText.Contains("{{"))
-            {
-                var parser = new ScriptParser();
                 snippetText = parser.EvaluateScript(snippetText, Model);
-                if (snippetText == null)
-                {
-                    MessageBox.Show("Snippet execution failed:  " + parser.ErrorMessage);
-                    return null;
-                }
-            }
             else if (snippet.ScriptMode == ScriptModes.Razor && snippetText.Contains("@"))
-            {
-                var parser = new ScriptParser();
                 snippetText = parser.EvaluateRazorScript(snippetText, Model);
-                if (snippetText == null)
-                {
-                    MessageBox.Show("Snippet execution failed:  " + parser.ErrorMessage);
-                    return null;
-                }
-            }
 
+            if (snippetText == null)
+            {
+                MessageBox.Show(parser.ErrorMessage, "Snippet Execution failed",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation);
+                return null;
+            }
+            
             return snippetText;
         }
 
