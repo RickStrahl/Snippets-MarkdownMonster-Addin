@@ -50,19 +50,32 @@ namespace SnippetsAddin
         }
         private string _snippetText;
 
-        public string ShortCut
+        public string Shortcut
         {
-            get { return _shortCut; }
+            get { return _shortcut; }
             set
             {
-                if (value == _shortCut) return;
-                _shortCut = value;
+                if (value == _shortcut) return;
+                _shortcut = value;
                 OnPropertyChanged();
             }
         }
-        private string _shortCut;
+        private string _shortcut;
+
 
         
+
+        public string KeyboardShortcut
+        {
+            get { return _keyboardShortcut; }
+            set
+            {
+                if (value == _keyboardShortcut) return;
+                _keyboardShortcut = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _keyboardShortcut;
 
         //public string ExpansionShortCut
         //{

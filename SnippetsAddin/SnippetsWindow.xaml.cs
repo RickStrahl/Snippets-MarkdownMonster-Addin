@@ -36,7 +36,7 @@ namespace SnippetsAddin
                 {
                     Name = "Copyright Notice",
                     ScriptMode = ScriptModes.CSharpExpressions,
-                    ShortCut = "copynotice",
+                    Shortcut = "copynotice",
                     SnippetText = @"
 ---
 &copy; My Company, {{DateTime.Now.ToString(""yyyy"")}};

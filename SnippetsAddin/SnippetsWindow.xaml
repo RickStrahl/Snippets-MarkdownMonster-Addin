@@ -131,6 +131,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel>
@@ -147,9 +148,13 @@
                 </StackPanel>
                 
                 <StackPanel Grid.Column="1" Margin="15,0,0,0">
-                    <TextBlock  Margin="0,10,0,4">Expansion Keys (at end of line)</TextBlock>
-                    <TextBox Text="{Binding ActiveSnippet.ShortCut}"  ToolTip="Key sequence that when typed into the editor at the end of a line, will expand the snippet."  />                   
-                      
+                    <TextBlock  Margin="0,10,0,4">Expansion String</TextBlock>
+                    <TextBox Text="{Binding ActiveSnippet.Shortcut}"  ToolTip="Key sequence that when typed into the editor at the end of a line, expands the snippet."  />                                         
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Margin="15,0,0,0">
+                    <TextBlock  Margin="0,10,0,4">Keyboard Shortcut</TextBlock>
+                    <TextBox Text="{Binding ActiveSnippet.KeyboardShortcut}"  ToolTip="Keyboard shortcut sequence like Alt+Shift+M, Ctrl+Alt+Enter etc. Requires a restart of Markdown Monster to kick in."  />
                 </StackPanel>
 
             </Grid>

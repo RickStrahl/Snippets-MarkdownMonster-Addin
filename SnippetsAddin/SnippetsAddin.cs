@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
+using System.Windows.Input;
 using FontAwesome.WPF;
 using MarkdownMonster;
 using MarkdownMonster.AddIns;
+using Westwind.Utilities;
 
 namespace SnippetsAddin
 {
@@ -33,7 +37,50 @@ namespace SnippetsAddin
             //menuItem.ExecuteConfiguration = null;
 
             // Must add the menu to the collection to display menu and toolbar items            
-            this.MenuItems.Add(menuItem);
+            this.MenuItems.Add(menuItem);            
+        }
+
+        public override void OnWindowLoaded()
+        {
+            foreach (var snippet in SnippetsAddinConfiguration.Current.Snippets)
+            {
+
+                if (!string.IsNullOrEmpty(snippet.KeyboardShortcut))
+                {
+                    var ksc = snippet.KeyboardShortcut.ToLower();
+                    KeyBinding kb = new KeyBinding();
+
+                    if (ksc.Contains("alt"))
+                        kb.Modifiers = ModifierKeys.Alt;
+                    if (ksc.Contains("shift"))
+                        kb.Modifiers |= ModifierKeys.Shift;
+                    if (ksc.Contains("ctrl") || ksc.Contains("ctl"))
+                        kb.Modifiers |= ModifierKeys.Control;
+
+                    string key =
+                        ksc.Replace("+", "")
+                            .Replace("-", "")
+                            .Replace("_", "")
+                            .Replace(" ", "")
+                            .Replace("alt", "")
+                            .Replace("shift", "")
+                            .Replace("ctrl", "")
+                            .Replace("ctl", "");
+
+                    key =   CultureInfo.CurrentCulture.TextInfo.ToTitleCase(key);
+                    if (!string.IsNullOrEmpty(key))
+                    {
+                        KeyConverter k = new KeyConverter();
+                        kb.Key = (Key)k.ConvertFromString(key);
+                    }
+                    
+                    // Whatever command you need to bind to
+                    kb.Command = new CommandBase((s, e) => InsertSnippet(snippet),
+                                                 (s,e) => Model.IsEditorActive);
+
+                    Model.Window.InputBindings.Add(kb);
+                }
+            }
         }
 
         public override void OnExecute(object sender)
@@ -133,10 +180,10 @@ namespace SnippetsAddin
             if (string.IsNullOrEmpty(line))
                 return;            
             
-            var snippet = SnippetsAddinConfiguration.Current.Snippets.FirstOrDefault(sn => sn.ShortCut != null && line.Trim().EndsWith(sn.ShortCut));
+            var snippet = SnippetsAddinConfiguration.Current.Snippets.FirstOrDefault(sn => sn.Shortcut != null && line.Trim().EndsWith(sn.Shortcut));
             if (snippet != null)
             {                               
-                editor.FindAndReplaceTextInCurrentLine(snippet.ShortCut, "");
+                editor.FindAndReplaceTextInCurrentLine(snippet.Shortcut, "");
                 InsertSnippet(snippet);
             }
         }
