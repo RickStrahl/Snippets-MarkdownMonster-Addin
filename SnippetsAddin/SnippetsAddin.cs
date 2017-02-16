@@ -27,10 +27,8 @@ namespace SnippetsAddin
             var menuItem = new AddInMenuItem(this)
             {
                 Caption = "Snippets Template Expansions",
-
-                // if an icon is specified it shows on the toolbar
-                // if not the add-in only shows in the add-ins menu
-                FontawesomeIcon = FontAwesomeIcon.PencilSquareOutline
+                FontawesomeIcon = FontAwesomeIcon.PencilSquareOutline,
+                KeyboardShortcut = SnippetsAddinConfiguration.Current.KeyboardShortcut
             };
 
             // if you don't want to display config or main menu item clear handler
@@ -170,7 +168,7 @@ namespace SnippetsAddin
             }
 
         }
-
+        
         public override void OnDocumentUpdated()
         {
             base.OnDocumentUpdated();
@@ -181,7 +179,7 @@ namespace SnippetsAddin
                 return;            
             
             var snippet = SnippetsAddinConfiguration.Current.Snippets.FirstOrDefault(sn => sn.Shortcut != null && line.Trim().EndsWith(sn.Shortcut));
-            if (snippet != null)
+            if (snippet == null)
             {                               
                 editor.FindAndReplaceTextInCurrentLine(snippet.Shortcut, "");
                 InsertSnippet(snippet);

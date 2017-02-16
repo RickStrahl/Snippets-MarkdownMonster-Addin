@@ -5,8 +5,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using MarkdownMonster;
 using SnippetsAddin.Annotations;
 using Westwind.Utilities.Configuration;
@@ -36,6 +34,22 @@ namespace SnippetsAddin
             }
         }
         private ObservableCollection<Snippet> _snippets = new ObservableCollection<Snippet>();
+
+        
+        /// <summary>
+        /// Optional Keyboard shortcut used to open the Snippets Window
+        /// </summary>
+        public string KeyboardShortcut
+        {
+            get { return _keyboardShortcut; }
+            set
+            {
+                if (value == _keyboardShortcut) return;
+                _keyboardShortcut = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _keyboardShortcut = string.Empty;
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
