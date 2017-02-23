@@ -179,7 +179,7 @@ namespace SnippetsAddin
                 return;            
             
             var snippet = SnippetsAddinConfiguration.Current.Snippets.FirstOrDefault(sn => sn.Shortcut != null && line.Trim().EndsWith(sn.Shortcut));
-            if (snippet == null)
+            if (snippet != null)
             {                               
                 editor.FindAndReplaceTextInCurrentLine(snippet.Shortcut, "");
                 InsertSnippet(snippet);
