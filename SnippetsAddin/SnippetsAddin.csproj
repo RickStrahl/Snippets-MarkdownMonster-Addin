@@ -62,17 +62,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="Westwind.RazorHosting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Westwind.RazorHosting.3.00\lib\net40\Westwind.RazorHosting.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Westwind.RazorHosting, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Westwind.RazorHosting.3.1.0\lib\net45\Westwind.RazorHosting.dll</HintPath>
     </Reference>
     <Reference Include="Westwind.Utilities">
       <HintPath>..\..\..\..\Program Files (x86)\Markdown Monster\Westwind.Utilities.dll</HintPath>
