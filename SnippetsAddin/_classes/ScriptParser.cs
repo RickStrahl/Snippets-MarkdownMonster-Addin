@@ -149,7 +149,7 @@ namespace SnippetsAddin
                         return null;
                     }
 
-                    var fullAssemblyName = FileUtils.GetFullPath(assemblyName);
+                    var fullAssemblyName = FileUtils.GetPhysicalPath(assemblyName);
                     if (File.Exists(fullAssemblyName))
                         assemblyName = fullAssemblyName;
 
