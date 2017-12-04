@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using FontAwesome.WPF;
 using MarkdownMonster;
 using MarkdownMonster.AddIns;
@@ -22,14 +23,21 @@ namespace SnippetsAddin
 
             Id = "Snippets";
 
+
             // by passing in the add in you automatically
             // hook up OnExecute/OnExecuteConfiguration/OnCanExecute
             var menuItem = new AddInMenuItem(this)
             {
-                Caption = "Snippets Template Expansions",
                 FontawesomeIcon = FontAwesomeIcon.PencilSquareOutline,
-                KeyboardShortcut = SnippetsAddinConfiguration.Current.KeyboardShortcut
+                Caption = "Snippets Template Expansions",                
+                KeyboardShortcut = SnippetsAddinConfiguration.Current.KeyboardShortcut                
             };
+            try
+            {
+                menuItem.IconImageSource = new ImageSourceConverter()
+                    .ConvertFromString("pack://application:,,,/SnippetsAddin;component/icon_22.png") as ImageSource;
+            }
+            catch { }
 
             // if you don't want to display config or main menu item clear handler
             //menuItem.ExecuteConfiguration = null;
@@ -40,9 +48,10 @@ namespace SnippetsAddin
 
         public override void OnWindowLoaded()
         {
+
+
             foreach (var snippet in SnippetsAddinConfiguration.Current.Snippets)
             {
-
                 if (!string.IsNullOrEmpty(snippet.KeyboardShortcut))
                 {
                     var ksc = snippet.KeyboardShortcut.ToLower();

@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\Users\rstrahl\AppData\Roaming\Markdown Monster\Addins\Snippets\</OutputPath>
+    <OutputPath>$(AppData)\Markdown Monster\Addins\Snippets\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\Users\rstrahl\AppData\Roaming\Markdown Monster\Addins\Snippets\</OutputPath>
+    <OutputPath>$(AppData)\Markdown Monster\Addins\Snippets\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,24 +33,24 @@
   <ItemGroup>
     <Reference Include="Dragablz, Version=0.0.3.181, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Markdown Monster\Dragablz.dll</HintPath>
+      <HintPath>$(LocalAppData)\Markdown Monster\Dragablz.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FontAwesome.WPF">
-      <HintPath>$(ProgramFiles)\Markdown Monster\FontAwesome.WPF.dll</HintPath>
+      <HintPath>$(LocalAppData)\Markdown Monster\FontAwesome.WPF.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MahApps.Metro">
-      <HintPath>$(ProgramFiles)\Markdown Monster\MahApps.Metro.dll</HintPath>
+      <HintPath>$(LocalAppData)\Markdown Monster\MahApps.Metro.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MarkdownMonster">
-      <HintPath>..\..\..\MarkdownMonster\MarkdownMonster\bin\Debug\MarkdownMonster.exe</HintPath>
+      <HintPath>$(LocalAppData)\Markdown Monster\MarkdownMonster.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Program Files (x86)\Markdown Monster\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(LocalAppData)\Markdown Monster\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -65,6 +65,7 @@
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>$(LocalAppData)\Markdown Monster\System.Windows.Interactivity.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Xaml" />
@@ -73,7 +74,7 @@
       <HintPath>..\packages\Westwind.RazorHosting.3.1.0\lib\net45\Westwind.RazorHosting.dll</HintPath>
     </Reference>
     <Reference Include="Westwind.Utilities">
-      <HintPath>..\..\..\..\Program Files (x86)\Markdown Monster\Westwind.Utilities.dll</HintPath>
+      <HintPath>$(LocalAppData)\Markdown Monster\Westwind.Utilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -92,6 +93,7 @@
     <Compile Include="_classes\wwScripting.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="icon_22.png" />
     <Content Include="version.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -100,7 +102,7 @@
     <Resource Include="icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Resource Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SnippetsWindow.xaml">
