@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MarkdownMonster;
+using Westwind.Utilities;
 
 namespace SnippetsAddin
 {
@@ -181,5 +182,9 @@ namespace SnippetsAddin
 
         }
 
+        private void ToolButtonMoreInfo_Click(object sender, RoutedEventArgs e)
+        {
+            ShellUtils.GoUrl("https://github.com/RickStrahl/Snippets-MarkdownMonster-Addin");
+        }
     }
 }

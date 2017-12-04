@@ -73,6 +73,7 @@
                         </StackPanel>
                     </Button>
 
+                    <Separator/>
                 </ToolBar>
                 <ToolBar>
                     <Button Name="ToolButtonRunSnippet" Click="ToolButtonRunSnippet_Click">
@@ -97,6 +98,23 @@
                             <TextBlock>Test Snippet</TextBlock>
                         </StackPanel>
                     </Button>
+
+
+                </ToolBar>
+                <ToolBar>
+                    <Button Name="ToolButtonInfo" Click="ToolButtonMoreInfo_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="InfoCircle"  Foreground="SteelBlue"
+                                            FontSize="15"                                                                                        
+                                            FontWeight="Normal" FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" 
+                                            Margin="5,2,10,0">
+
+                            </fa:FontAwesome>
+
+                            <TextBlock>Documentation</TextBlock>
+                        </StackPanel>
+                    </Button>
+
                 </ToolBar>
                 </StackPanel>
             </ToolBarPanel>
