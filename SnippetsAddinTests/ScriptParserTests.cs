@@ -35,7 +35,7 @@ Time is {{DateTime.Now.ToString(""MMM dd, yyyy HH:mm:ss"")}}
         }
 
         [TestMethod]
-        public async Task EvalScriptWithExpressionError()
+        public void EvalScriptWithExpressionError()
         {
             string script = @"
 Hi {{state.Name}},
@@ -52,7 +52,7 @@ Time is {{DateTime.sNow.ToString(""MMM dd, yyyy HH:mm:ss"")}}
 
 
         [TestMethod]
-        public async Task EvalScriptSync()
+        public void EvalScriptSync()
         {
             string script = @"
 Hi {{Name}},
