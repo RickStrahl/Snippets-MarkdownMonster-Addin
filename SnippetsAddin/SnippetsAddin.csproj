@@ -70,8 +70,8 @@
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="Westwind.RazorHosting, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Westwind.RazorHosting.3.1.0\lib\net45\Westwind.RazorHosting.dll</HintPath>
+    <Reference Include="Westwind.RazorHosting, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Westwind.RazorHosting.3.2.0.0\lib\net40\Westwind.RazorHosting.dll</HintPath>
     </Reference>
     <Reference Include="Westwind.Utilities">
       <HintPath>$(LocalAppData)\Markdown Monster\Westwind.Utilities.dll</HintPath>
