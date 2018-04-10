@@ -1,18 +1,20 @@
-cd "$PSScriptRoot" 
+Set-Location "$PSScriptRoot" 
 
 $src = "$env:appdata\Markdown Monster\Addins\Snippets"
 "Copying from: $src"
 
 "Cleaning up build files..."
-del addin.zip
+Remove-Item addin.zip
 
 remove-item -recurse -force .\Distribution
-md Distribution
+mkdir Distribution
 
 "Copying files..."
-copy "$src\*.dll" .\Distribution
-copy "$src\version.json" .\Distribution
-copy "$src\version.json" .\
+Copy-Item "$src\*.dll" .\Distribution
+Copy-Item "$src\version.json" .\Distribution
+Copy-Item "$src\version.json" .\
 
 "Zipping up setup file..."
-7z a -tzip  addin.zip .\Distribution\*.*
+.\7z a -tzip  addin.zip .\Distribution\*.*
+
+Get-ChildItem
