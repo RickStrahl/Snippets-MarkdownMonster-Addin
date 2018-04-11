@@ -111,7 +111,7 @@ namespace SnippetsAddin
 
         public override bool OnCanExecute(object sender)
         {
-            return true;
+            return Model.IsEditorActive;
         }
 
         public override void OnApplicationShutdown()

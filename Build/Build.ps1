@@ -17,4 +17,6 @@ Copy-Item "$src\version.json" .\
 "Zipping up setup file..."
 .\7z a -tzip  addin.zip .\Distribution\*.*
 
+remove-item .\Distribution -recurse
+
 Get-ChildItem
