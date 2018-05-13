@@ -7,7 +7,7 @@ $src = "$env:appdata\Markdown Monster\Addins\Snippets"
 Remove-Item addin.zip
 
 remove-item -recurse -force .\Distribution
-mkdir Distribution
+md .\Distribution
 
 "Copying files..."
 Copy-Item "$src\*.dll" .\Distribution
