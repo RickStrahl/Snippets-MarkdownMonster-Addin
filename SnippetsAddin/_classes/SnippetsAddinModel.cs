@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using MarkdownMonster;
-using Newtonsoft.Json;
 using SnippetsAddin.Annotations;
 
 
